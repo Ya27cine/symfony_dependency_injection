@@ -18,7 +18,9 @@ $controllerDef = new Definition(OrderController::class, [
     new Reference('mailer.gmail'),
     new Reference('texter.sms')
 ]);
+$controllerDef->addMethodCall('sayHello');
 $container->setDefinition('oreder_controller', $controllerDef);
+
 
 
 
