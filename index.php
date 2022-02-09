@@ -12,6 +12,15 @@ require __DIR__ . '/vendor/autoload.php';
 
 $container = new ContainerBuilder();
 
+$container->setParameter('mailer.gmail_user', "lior@gmail.com");
+$container->setParameter('mailer.gmail_password', "123456");
+
+$container->setAlias(OrderController::class, 'oreder_controller');
+$container->setAlias(Database::class, 'database');
+$container->setAlias(GmailMailer::class, 'mailer.gmail');
+$container->setAlias(SmsTexter::class, 'texter.sms');
+
+
 //$controller = new OrderController($database, $mailer, $texter);
 // $controllerDef = new Definition(OrderController::class, [
 //     new Reference('database'),
@@ -22,9 +31,9 @@ $container = new ContainerBuilder();
 // $controllerDef->addMethodCall('sayHello');
 
 $container->register('oreder_controller', OrderController::class)
-   ->setArguments([ new Reference('database'), 
-                    new Reference('mailer.gmail'), 
-                    new Reference('texter.sms')])
+   ->setArguments([ new Reference(Database::class), 
+                    new Reference(GmailMailer::class), 
+                    new Reference(SmsTexter::class)])
     ->addMethodCall('sayHello');
 
 //$database = new Database();
@@ -45,10 +54,10 @@ $container->register('texter.sms', SmsTexter::class)
 // $container->setDefinition('mailer.gmail', $mailerDef);
 // $mailer = $container->get('mailer.gmail');
 $container->register('mailer.gmail', GmailMailer::class)
-->setArguments([ "lior@gmail.com", "123456"]);
+->setArguments([ "%mailer.gmail_user%", "%mailer.gmail_password%"]);
 
 
-$controller = $container->get('oreder_controller');
+$controller = $container->get(OrderController::class);
 
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];
