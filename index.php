@@ -3,7 +3,10 @@
 use App\Controller\OrderController;
 use App\Database\Database;
 use App\Mailer\GmailMailer;
+use App\Mailer\SmtpMailer;
+use App\Texter\FaxTexter;
 use App\Texter\SmsTexter;
+use App\Texter\TexterInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -19,6 +22,10 @@ $container->setAlias(OrderController::class, 'oreder_controller');
 $container->setAlias(Database::class, 'database');
 $container->setAlias(GmailMailer::class, 'mailer.gmail');
 $container->setAlias(SmsTexter::class, 'texter.sms');
+$container->setAlias(SmtpMailer::class, 'mailer.smtp');
+$container->setAlias(FaxTexter::class, 'texter.fax');
+$container->setAlias(TexterInterface::class, 'texter.sms');
+
 
 
 //$controller = new OrderController($database, $mailer, $texter);
@@ -41,6 +48,12 @@ $container->register('oreder_controller', OrderController::class)
 // $container->setDefinition('database', $databaseDef);
 // $database = $container->get('database');
 $container->register('database', Database::class);
+
+$container->register('mailer.smtp', SmtpMailer::class)
+->setArguments(['smtp://localhost', 'root', '123']);
+
+$container->register('texter.fax', FaxTexter::class);
+
 
 //$texter = new SmsTexter("service.sms.com", "apikey123");
 // $texterDef = new Definition(SmsTexter::class,[ "service.sms.com", "apikey123"]);
