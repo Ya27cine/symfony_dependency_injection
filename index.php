@@ -3,6 +3,7 @@
 use App\Controller\OrderController;
 use App\Database\Database;
 use App\Mailer\GmailMailer;
+use App\Mailer\MailerInterface;
 use App\Mailer\SmtpMailer;
 use App\Texter\FaxTexter;
 use App\Texter\SmsTexter;
@@ -18,12 +19,18 @@ $container = new ContainerBuilder();
 $container->setParameter('mailer.gmail_user', "lior@gmail.com");
 $container->setParameter('mailer.gmail_password', "123456");
 
-$container->setAlias(OrderController::class, 'oreder_controller');
+$container->setAlias(OrderController::class, 'oreder_controller')->setPublic(true);
 $container->setAlias(Database::class, 'database');
+
 $container->setAlias(GmailMailer::class, 'mailer.gmail');
+$container->setAlias(SmtpMailer::class, 'mailer.smtp');
+// dym
+$container->setAlias(MailerInterface::class, 'mailer.gmail');
+
 $container->setAlias(SmsTexter::class, 'texter.sms');
 $container->setAlias(SmtpMailer::class, 'mailer.smtp');
 $container->setAlias(FaxTexter::class, 'texter.fax');
+// dynamic 
 $container->setAlias(TexterInterface::class, 'texter.sms');
 
 
@@ -38,9 +45,11 @@ $container->setAlias(TexterInterface::class, 'texter.sms');
 // $controllerDef->addMethodCall('sayHello');
 
 $container->register('oreder_controller', OrderController::class)
-   ->setArguments([ new Reference(Database::class), 
-                    new Reference(GmailMailer::class), 
-                    new Reference(SmsTexter::class)])
+   ->setPublic(true)
+   ->setAutowired(true)
+//    ->setArguments([ new Reference(Database::class), 
+//                     new Reference(GmailMailer::class), 
+//                     new Reference(SmsTexter::class)])
     ->addMethodCall('sayHello');
 
 //$database = new Database();
@@ -68,6 +77,9 @@ $container->register('texter.sms', SmsTexter::class)
 // $mailer = $container->get('mailer.gmail');
 $container->register('mailer.gmail', GmailMailer::class)
 ->setArguments([ "%mailer.gmail_user%", "%mailer.gmail_password%"]);
+
+$container->compile();
+
 
 
 $controller = $container->get(OrderController::class);

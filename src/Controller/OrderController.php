@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Database\Database;
 use App\Mailer\Email;
 use App\Mailer\MailerInterface;
+use App\Mailer\SmtpMailer;
 use App\Model\Order;
 use App\Texter\Text;
 use App\Texter\TexterInterface;
