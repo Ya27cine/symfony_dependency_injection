@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Database\Database;
 use App\Mailer\Email;
+use App\Mailer\GmailMailer;
 use App\Mailer\MailerInterface;
 use App\Mailer\SmtpMailer;
 use App\Model\Order;
@@ -43,8 +44,14 @@ class OrderController
         $this->texter->send($textMessage);
     }
 
-    public function sayHello()  {
-        var_dump("Hello, I am sayHello() ");
+    public function sayHello($msg, $age)  {
+        var_dump("Hello, $msg, $age ");
         return 99948;
+    }
+
+    public function setSecondaryMailer(GmailMailer $gmailMailer)
+    {
+        var_dump("Hello, setSecondaryMailer");
+
     }
 }
