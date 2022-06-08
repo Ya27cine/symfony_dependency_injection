@@ -22,6 +22,6 @@ class SmsTexter implements TexterInterface
 
     public function send(Text $text)
     {
-        var_dump("ENVOI DE SMS : ", $text);
+        dump("ENVOI DE SMS : ", $text);
     }
 }

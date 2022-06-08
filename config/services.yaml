@@ -13,7 +13,7 @@ services:
         - method: sayHello
           arguments:
             - "Bonjour a Tous"
-            - 33
+            - 77
         - method: setSecondaryMailer
           arguments:
             - "@mailer.gmail"
@@ -41,6 +41,8 @@ services:
     App\Controller\OrderController:
       alias: oreder_controller
       public: true 
+      
+    # alias :
     App\Database\Database: '@database'
     App\Mailer\GmailMailer: '@mailer.gmail'
     App\Mailer\SmtpMailer: '@mailer.smtp'

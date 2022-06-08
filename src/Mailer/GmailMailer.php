@@ -23,6 +23,6 @@ class GmailMailer implements MailerInterface
 
     public function send(Email $email)
     {
-        var_dump("ENVOI VIA GMAILMAILER", $email);
+        dump(" >> ENVOI VIA GMAILMAILER", $email);
     }
 }

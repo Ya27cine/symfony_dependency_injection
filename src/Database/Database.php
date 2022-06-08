@@ -9,6 +9,6 @@ class Database
 
     public function insertOrder(Order $order)
     {
-        var_dump("REQUETE DATABASE POUR INSERER LA COMMANDE");
+        dump(">> REQUETE DATABASE POUR INSERER LA COMMANDE");
     }
 }

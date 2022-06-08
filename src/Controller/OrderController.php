@@ -45,13 +45,13 @@ class OrderController
     }
 
     public function sayHello($msg, $age)  {
-        var_dump("Hello, $msg, $age ");
+        dump("Hello, $msg, $age ");
         return 99948;
     }
 
     public function setSecondaryMailer(GmailMailer $gmailMailer)
     {
-        var_dump("Hello, setSecondaryMailer");
+        dump("Hello, setSecondaryMailer");
 
     }
 }
