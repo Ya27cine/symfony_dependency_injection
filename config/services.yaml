@@ -3,6 +3,11 @@ parameters:
     mailer.gmail_password: "123456"
 
 services:
+    _instanceof:
+      App\HasLoggerInterface:
+       # add tag #with_logger for all classes imp  i: HasLoggerInterface
+        tags: ["with_logger"]
+
     _defaults:
       autowire: true
 
@@ -23,10 +28,12 @@ services:
     mailer.gmail:
       class: App\Mailer\GmailMailer
       arguments: [ "%mailer.gmail_user%", "%mailer.gmail_password%"]
+      #tags: ["with_logger"] :: look attr: services/_instanceof
 
     texter.sms:
       class: App\Texter\SmsTexter
       arguments: [ "service.sms.com", "apikey123"]
+      #tags: ["with_logger"] :: look attr: services/_instanceof
 
     texter.fax:
       class: App\Texter\FaxTexter

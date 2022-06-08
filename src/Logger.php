@@ -4,7 +4,7 @@ namespace App;
 
 class Logger{
     public function log($msg){
-        dump("MESSAGE : $msg");
+        dump("Call-Method::MSG : $msg");
     }
 }
 ?>
