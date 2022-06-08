@@ -2,11 +2,15 @@
 
 namespace App\Mailer;
 
-class GmailMailer implements MailerInterface
+use App\HasLoggerInterface;
+
+class GmailMailer implements MailerInterface, HasLoggerInterface
 {
 
     protected $user;
     protected $password;
+
+    protected $logger;
 
     public function __construct(string $user, string $password)
     {
@@ -14,8 +18,13 @@ class GmailMailer implements MailerInterface
         $this->password = $password;
     }
 
+    public function setLogger($logger){
+        $this->logger = $logger;
+        $this->logger->log("Gmail , Done !");
+    }
+
     public function send(Email $email)
     {
-        var_dump("ENVOI VIA GMAILMAILER", $email);
+        dump(" >> ENVOI VIA GMAILMAILER", $email);
     }
 }
