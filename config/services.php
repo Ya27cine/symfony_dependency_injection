@@ -2,6 +2,7 @@
 
 use App\Controller\OrderController;
 use App\Database\Database;
+use App\HasLoggerInterface;
 use App\Logger;
 use App\Mailer\GmailMailer;
 use App\Mailer\MailerInterface;
@@ -21,6 +22,10 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 
     $services = $containerConfigurator->services();
     $services->defaults()->autowire(true);
+
+    # add tag #with_logger for all classes imp  i: HasLoggerInterface
+    $services->instanceof(HasLoggerInterface::class)->tag('with_logger');
+
     $services
     
         ->set('oreder_controller', OrderController::class)

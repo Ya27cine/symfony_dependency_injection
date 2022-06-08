@@ -22,7 +22,7 @@ class LoggerCompilerPasse implements CompilerPassInterface{
             $tags = $def->getTags() ;
             
             if( array_key_exists("with_logger", $tags) )
-                $def->addMethodCall('setLogger', [ new Reference('logger')]);
+                $def->addMethodCall('setLogger', [ new Reference('logger')]); // alias logger -> class App/Logger
         }
     }
 }
