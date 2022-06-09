@@ -24,7 +24,7 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
     $services->defaults()->autowire(true);
 
     # add tag #with_logger for all classes imp  i: HasLoggerInterface
-    $services->instanceof(HasLoggerInterface::class)->tag('with_logger');
+    # $services->instanceof(HasLoggerInterface::class)->tag('with_logger');
 
     $services
     

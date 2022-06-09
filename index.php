@@ -3,6 +3,7 @@
 use App\Controller\OrderController;
 use App\Database\Database;
 use App\DependencyInjection\LoggerCompilerPasse;
+use App\HasLoggerInterface;
 use App\Logger;
 use App\Mailer\GmailMailer;
 use App\Mailer\MailerInterface;
@@ -21,12 +22,17 @@ require __DIR__ . '/vendor/autoload.php';
 
 $container = new ContainerBuilder();
 
+// add tag #with_logger for all classes imp  i: HasLoggerInterface
+$container->registerForAutoconfiguration(HasLoggerInterface::class)->addTag("with_logger");
+
 // Chargement de la config des services :
 // $loader = new PhpFileLoader($container, new FileLocator([ __DIR__ . "/config"]));
 // $loader->load('services.php');
 
 $loader = new YamlFileLoader($container, new FileLocator([ __DIR__ . "/config"]));
 $loader->load('services.yaml');
+$loader->load('servicesTest.yaml');
+
 
 // #BEFORE#
 

@@ -1,0 +1,11 @@
+
+services:
+  # alias :
+    App\Database\Database: '@database'
+    App\Mailer\GmailMailer: '@mailer.gmail'
+    App\Mailer\SmtpMailer: '@mailer.smtp'
+    App\Mailer\MailerInterface: '@mailer.gmail'
+    App\Texter\SmsTexter: '@texter.sms'
+    App\Texter\FaxTexter: '@texter.fax'
+    App\Texter\TexterInterface: '@texter.sms'
+    App\Logger: '@logger'

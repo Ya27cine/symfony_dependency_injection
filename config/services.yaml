@@ -1,15 +1,19 @@
 parameters:
     mailer.gmail_user: "yassine@gmail.com"
     mailer.gmail_password: "123456"
+    firstName: "PROSTAM"
 
 services:
-    _instanceof:
-      App\HasLoggerInterface:
-       # add tag #with_logger for all classes imp  i: HasLoggerInterface
-        tags: ["with_logger"]
+    # _instanceof: (look index > .. registerForAutoconfiguration())
+    #   App\HasLoggerInterface:
+    #    # add tag #with_logger for all classes imp  i: HasLoggerInterface
+    #     tags: ["with_logger"]
 
     _defaults:
       autowire: true
+      autoconfigure: true 
+      bind:
+        $firstName: "%firstName%"
 
     oreder_controller:
       class: App\Controller\OrderController
@@ -49,13 +53,5 @@ services:
       alias: oreder_controller
       public: true 
       
-    # alias :
-    App\Database\Database: '@database'
-    App\Mailer\GmailMailer: '@mailer.gmail'
-    App\Mailer\SmtpMailer: '@mailer.smtp'
-    App\Mailer\MailerInterface: '@mailer.gmail'
-    App\Texter\SmsTexter: '@texter.sms'
-    App\Texter\FaxTexter: '@texter.fax'
-    App\Texter\TexterInterface: '@texter.sms'
-    App\Logger: '@logger'
+    
   

@@ -12,10 +12,11 @@ class GmailMailer implements MailerInterface, HasLoggerInterface
 
     protected $logger;
 
-    public function __construct(string $user, string $password)
+    public function __construct(string $user, string $password, string $firstName)
     {
         $this->user = $user;
         $this->password = $password;
+        var_dump("Mon var global bind : firstName $firstName");
     }
 
     public function setLogger($logger){
